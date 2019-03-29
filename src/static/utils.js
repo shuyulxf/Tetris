@@ -14,8 +14,7 @@ function dealViewScale () {
     const dp2px = dp => PixelRatio.getPixelSizeForLayoutSize(dp),
         pxRatio = PixelRatio.get(),
         design_scale_x = designSize.width / dp2px(width);
-
-    return 1 / pxRatio / design_scale_x;
+    return 1;
 }
 
 const getViewSize = ((fn) => {
@@ -28,7 +27,7 @@ function dealViewSize() {
     let scale = getViewScale();
     return {
         width: width / scale,
-        height
+        height: height / scale
     }
 }
 
@@ -53,7 +52,7 @@ function dealGridSize() {
     let { height } = getViewSize();
     return {
         x: latticeNumber,
-        y: Math.floor((height - operationHeight) / (getLatticeSize() + whiteSpaceGap)) - 2
+        y: Math.floor((height - operationHeight) / (getLatticeSize() + whiteSpaceGap * 2))
     }
 }
 
@@ -87,9 +86,6 @@ const getShapes = () => {
         coords.push(coord);
     }
     return coords;
-}
-const getOperateSize = () => {
-    return getViewSize().height - (size + whiteSpaceGap) * getGridSize().y - 2 * pd;
 }
 
 const clockwiseRotatePure = (coord, shapeCenter, d = 90) => {
@@ -160,7 +156,6 @@ export {
     getGridItem,
     createRandom,
     getPosition,
-    getOperateSize,
     clockwiseRotatePure,
     clockwiseRotate,
     anticlockwiseRotate,

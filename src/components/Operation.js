@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { pd, operationHeight, colorMap, status, PAUSE_STATUS, shapeCenter } from '../static/config.js';
-import { getOperateSize, clockwiseRotate, getGridSize, initShape, initGridRow, initGridData, clockwiseRotatePure} from '../static/utils.js';
+import { clockwiseRotate, getGridSize, initShape, initGridRow, initGridData, clockwiseRotatePure} from '../static/utils.js';
 import { mapStateToProps, mapDispatchToProps } from '../store/connect.js';
 
 let statusSize = Math.floor(operationHeight / 3 * 2),
@@ -51,7 +51,7 @@ class Operate extends React.Component {
             if (timer === null) {
                 this.timer = setInterval(() => {
                     this.move('down');
-                }, 800);
+                }, 300);
             }
         }
     }
@@ -273,9 +273,10 @@ class Operate extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        height: getOperateSize(),
+        height: operationHeight,
         paddingLeft: pd,
         paddingRight: pd,
+        paddingTop: pd,
         flexDirection: 'row',
         alignItems: 'flex-start',
         alignContent: 'space-between',
